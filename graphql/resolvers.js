@@ -1,4 +1,3 @@
-import axios from "axios";
 
 export const resolvers = {
 	Query: {
@@ -21,42 +20,43 @@ function postPageInfoResolver(parent, args) {
 	}
 }
 
-async function postsResolver(parent, args) {
+async function postsResolver(parent, args, {dataSources}) {
 	const {limit=10, offset, after} = args;
 	var queryParams = {};
 	if(limit) {
-		queryParams['per_page'] = limit+1;
+		queryParams['per_page'] = (limit+1).toString();
 	}
 	if(after) {
 		var beforeDate = Buffer.from(after, 'base64').toString();
 		queryParams['before'] = beforeDate;
 	} else if(offset) {
-		queryParams['offset'] = offset;
+		queryParams['offset'] = offset.toString();
 	}
 
-	var queryParamsString = new URLSearchParams(queryParams).toString();
 	try {
-		var posts = await axios.get( `http://test.lndo.site/wp-json/wp/v2/posts?${queryParamsString}` );
-		var postsData = posts.data;
-		var hasNextPage = postsData.length >= limit+1
+		var posts = await dataSources.wp.fetchPosts({
+			queryParams,
+			postType: 'posts',
+		});
+		var hasNextPage = posts.length >= limit+1
 		if(hasNextPage) {
-			postsData.pop();
+			posts.pop();
 		}
 		var returnData = {
-			posts: postsData,
+			posts,
 			hasNextPage
 		}
 		return returnData;
 	} catch (error) {
-		// What should be ideally returned here?
+		console.log(error);
 		return null;
 	}
 }
 
-async function menuResolver(parent, args) {
+async function menuResolver(parent, args, {dataSources}) {
 	const {id, slug} = args;
 
-	var menuIDOrSlug = '';
+	var menuIDOrSlug = null;
 
 	if (id !== undefined) {
 		menuIDOrSlug = id;
@@ -64,11 +64,15 @@ async function menuResolver(parent, args) {
 		menuIDOrSlug = slug;
 	}
 
+	if(menuIDOrSlug == null) {
+		return null;
+	}
+
 	try {
-		var menus = await axios.get( "http://test.lndo.site/wp-json/menus/v1/menus/primary" );
-		return menus.data;
+		var menus = await dataSources.wp.fetchMenu(menuIDOrSlug);
+		return menus;
 	} catch (error) {
-		// What should be ideally returned here?
+		console.log(error);
 		return null;
 	}
 
