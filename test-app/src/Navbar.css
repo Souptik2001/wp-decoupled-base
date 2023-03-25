@@ -1,0 +1,65 @@
+.Navbar {
+	position: sticky;
+	position: -webkit-sticky;
+	color: block;
+	text-decoration: none;
+	top: 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: white;
+	padding: 200px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.Navbar a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.Navbar a:hover {
+	text-decoration: underline;
+}
+
+.Navbar .menu {
+	display: flex;
+	justify-content: space-evenly;
+	list-style: none;
+	align-items: stretch;
+	gap: 50px;
+}
+
+.Navbar .menu .has-child-menu::after {
+	cursor: pointer;
+	padding-left: 10px;
+	content: '>';
+}
+
+.Navbar .has-child-menu:hover::after {
+	-webkit-transform: rotate(40deg);
+	-moz-transform: rotate(40deg);
+	-o-transform: rotate(40deg);
+	transform: rotate(40deg);
+}
+
+.Navbar .menu .menu-item {
+	position: relative;
+}
+
+.Navbar .menu .menu-item .submenu {
+	position: absolute;
+	margin-top: 10px;
+	background: white;
+	color: black;
+	min-width: 200px;
+	text-align: left;
+	padding: 20px;
+	list-style: none;
+	border: 1px orange solid;
+	visibility: hidden;
+}
+
+.Navbar .menu .menu-item .submenu.is-visible {
+	visibility: visible;
+}
