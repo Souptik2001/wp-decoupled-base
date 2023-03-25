@@ -1,15 +1,20 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import BlogList from './components/BlogList';
 import Navbar from './components/Navbar';
-import logo from './logo.svg';
+import PageNotFound from './components/PageNotFound';
 
 function App() {
 
     return (
       <div className="App">
         <Navbar/>
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
+        <div className="container">
+          <Routes>
+            <Route path='/' element={<BlogList />} />
+            <Route path='*' element={<PageNotFound />} />
+          </Routes>
+        </div>
       </div>
     );
 }
