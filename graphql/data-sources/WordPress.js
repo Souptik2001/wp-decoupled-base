@@ -23,4 +23,20 @@ export class WordPress extends RESTDataSource {
 		return posts;
 
 	}
+
+	async fetchPost({postType, slug}) {
+
+		var post = await this.get( `wp/v2/${postType}`, {
+			params: {
+				slug
+			}
+		} );
+
+		if ( post.length < 1 ) {
+			return null;
+		}
+
+		return post[0];
+
+	}
 }

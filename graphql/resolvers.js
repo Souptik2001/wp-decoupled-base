@@ -3,11 +3,34 @@ export const resolvers = {
 	Query: {
 		posts: postsResolver,
 		menu: menuResolver,
+		post: postResolver
 	},
 	PostReturn: {
 		pageInfo: postPageInfoResolver,
 	}
 };
+
+async function postResolver(parent, args, {dataSources}) {
+
+	var slug = args.slug;
+
+	if ( slug && slug !== "" ) {
+		try {
+			var post = await dataSources.wp.fetchPost({
+				postType: 'posts',
+				slug
+			});
+
+			return post;
+		} catch (error) {
+			console.log(error);
+			return null;
+		}
+	}
+
+	return null;
+
+}
 
 function postPageInfoResolver(parent, args) {
 	var endCursor = null;
