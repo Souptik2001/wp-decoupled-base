@@ -39,4 +39,12 @@ export class WordPress extends RESTDataSource {
 		return post[0];
 
 	}
+
+	async fetchUser(id) {
+
+		var author = await this.get( `wp/v2/users/${id}` );
+
+		return author;
+
+	}
 }

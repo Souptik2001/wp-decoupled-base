@@ -7,8 +7,19 @@ export const resolvers = {
 	},
 	PostReturn: {
 		pageInfo: postPageInfoResolver,
+	},
+	Post: {
+		author: userResolver,
 	}
 };
+
+async function userResolver(parent, args, {dataSources}) {
+
+	var author = await dataSources.wp.fetchUser(parent.author);
+
+	return author;
+
+}
 
 async function postResolver(parent, args, {dataSources}) {
 

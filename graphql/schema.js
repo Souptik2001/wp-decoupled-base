@@ -13,8 +13,15 @@ export const typeDefs = `#graphql
 	  slug: String!
     title: Title
 	  content: Content
-    author: Int
+    author: User
     date: String
+  }
+
+  type User {
+    id: Int!
+    name: String
+    slug: String
+    link: String
   }
 
   type Content {
