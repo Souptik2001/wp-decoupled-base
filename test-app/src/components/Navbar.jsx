@@ -6,7 +6,7 @@ import Menu from "./Navbar/Menu";
 
 
 function Navbar() {
-	const {data, loading, error} = useQuery(
+	const {data} = useQuery(
 		GET_NAVBAR,
 		{
 			variables: {

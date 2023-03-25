@@ -18,7 +18,7 @@ function MenuItem({menu}) {
 
 	return (
 		<li className="menu-item" onMouseEnter={() => {changeSubMenuSate(true)}} onMouseLeave={() => {changeSubMenuSate(false)}}>
-			<Link to='/' className={(menu.child_items && menu.child_items.length > 0) ? "has-child-menu" : ""}>{menu.title}</Link>
+			<Link to={menu.url} className={(menu.child_items && menu.child_items.length > 0) ? "has-child-menu" : ""}>{menu.title}</Link>
 			{
 				menu.child_items
 				&&
