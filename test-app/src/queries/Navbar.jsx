@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_NAVBAR = gql`
-	query FetchMenus($slug: String) {
+	query GetMenus($slug: String) {
 		menu(slug: $slug) {
 			slug
 			name
