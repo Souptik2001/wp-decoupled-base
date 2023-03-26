@@ -13,8 +13,8 @@ function App() {
         <div className="container">
           <Routes>
             <Route path='/' element={<BlogList />} />
-            <Route path='/:taxonomy/:slug' element={<BlogList />} />
-            <Route path='/blog/:slug' element={<Blog />} />
+            <Route path='/:postType/:taxonomy/:slug' element={<BlogList />} />
+            <Route path='/:postType/:year/:month/:date/:slug' element={<Blog />} />
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         </div>
