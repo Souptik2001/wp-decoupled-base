@@ -8,15 +8,10 @@ export const GET_POSTS = gql`
 				hasNextPage
 			}
 			posts {
-				author {
-					name
-					slug
-					link
-					id
-				}
-				content {
+				excerpt {
 					rendered
 				}
+				date
 				slug
 				title {
 					rendered
