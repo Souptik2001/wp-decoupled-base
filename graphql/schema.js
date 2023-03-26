@@ -58,7 +58,7 @@ export const typeDefs = `#graphql
   }
 
   type Query {
-    posts(limit: Int, offset: Int, after: String): PostReturn
+    posts(postType: String!, limit: Int, offset: Int, after: String): PostReturn
     post(postType: String!, slug: String!): Post
     menu(id: Int, slug: String): Menu
   }

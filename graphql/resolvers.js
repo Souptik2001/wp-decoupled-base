@@ -23,8 +23,7 @@ async function userResolver(parent, args, {dataSources}) {
 
 async function postResolver(parent, args, {dataSources}) {
 
-	var slug = args.slug;
-	var postType = args.postType;
+	var {slug, postType} = args;
 
 	if ( slug && slug !== "" ) {
 		try {
@@ -56,7 +55,7 @@ function postPageInfoResolver(parent, args) {
 }
 
 async function postsResolver(parent, args, {dataSources}) {
-	const {limit=10, offset, after} = args;
+	const {postType, limit=10, offset, after} = args;
 	var queryParams = {};
 	if(limit) {
 		queryParams['per_page'] = (limit+1).toString();
@@ -71,7 +70,7 @@ async function postsResolver(parent, args, {dataSources}) {
 	try {
 		var posts = await dataSources.wp.fetchPosts({
 			queryParams,
-			postType: 'posts',
+			postType,
 		});
 		var hasNextPage = posts.length >= limit+1
 		if(hasNextPage) {
