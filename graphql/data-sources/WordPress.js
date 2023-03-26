@@ -47,4 +47,26 @@ export class WordPress extends RESTDataSource {
 		return author;
 
 	}
+
+	async parseBody(response) {
+		var responseBody = {};
+		const contentType = response.headers.get('Content-Type');
+		const contentLength = response.headers.get('Content-Length');
+		if (
+		  response.status !== 204 &&
+		  contentLength !== '0' &&
+		  contentType &&
+		  (contentType.startsWith('application/json') ||
+			contentType.endsWith('+json'))
+		) {
+		  responseBody['result'] = await response.json();
+		} else {
+			responseBody['result'] = await response.text();
+		}
+		const totalPages = response.headers.get('X-WP-TotalPages');
+
+		responseBody['totalPages'] = totalPages;
+
+		return responseBody;
+	  }
 }

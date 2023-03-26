@@ -17,7 +17,7 @@ async function userResolver(parent, args, {dataSources}) {
 
 	var author = await dataSources.wp.fetchUser(parent.author);
 
-	return author;
+	return author['result'];
 
 }
 
@@ -32,7 +32,7 @@ async function postResolver(parent, args, {dataSources}) {
 				slug
 			});
 
-			return post;
+			return post['result'];
 		} catch (error) {
 			console.log(error);
 			return null;
@@ -50,7 +50,8 @@ function postPageInfoResolver(parent, args) {
 	}
 	return {
 		endCursor,
-		hasNextPage: parent.hasNextPage
+		hasNextPage: parent.hasNextPage,
+		totalPages: parent.totalPages
 	}
 }
 
@@ -72,13 +73,16 @@ async function postsResolver(parent, args, {dataSources}) {
 			queryParams,
 			postType,
 		});
+		var totalPages = posts['totalPages'];
+		posts = posts['result'];
 		var hasNextPage = posts.length >= limit+1
 		if(hasNextPage) {
 			posts.pop();
 		}
 		var returnData = {
 			posts,
-			hasNextPage
+			hasNextPage,
+			totalPages
 		}
 		return returnData;
 	} catch (error) {
@@ -104,7 +108,7 @@ async function menuResolver(parent, args, {dataSources}) {
 
 	try {
 		var menus = await dataSources.wp.fetchMenu(menuIDOrSlug);
-		return menus;
+		return menus['result'];
 	} catch (error) {
 		console.log(error);
 		return null;

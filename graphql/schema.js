@@ -6,6 +6,7 @@ export const typeDefs = `#graphql
   type PageInfo {
     endCursor: String
     hasNextPage: Boolean
+    totalPages: Int
   }
 
   type Post {
@@ -15,6 +16,7 @@ export const typeDefs = `#graphql
 	  content: Content
     author: User
     date: String
+    excerpt: Excerpt
   }
 
   type User {
@@ -29,6 +31,9 @@ export const typeDefs = `#graphql
     protected: Boolean
   }
 
+  type Excerpt {
+    rendered: String
+  }
 
   type Title {
 	  rendered: String
