@@ -24,11 +24,12 @@ async function userResolver(parent, args, {dataSources}) {
 async function postResolver(parent, args, {dataSources}) {
 
 	var slug = args.slug;
+	var postType = args.postType;
 
 	if ( slug && slug !== "" ) {
 		try {
 			var post = await dataSources.wp.fetchPost({
-				postType: 'posts',
+				postType: postType,
 				slug
 			});
 
