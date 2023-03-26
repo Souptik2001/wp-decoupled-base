@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Blog from './components/Blog';
-import BlogList from './components/BlogList';
+import BlogListRoutes from './components/BlogListRoutes';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import PageNotFound from './components/PageNotFound';
@@ -14,11 +13,7 @@ function App() {
         <div className="container">
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/:postType'>
-              <Route path='' element={<BlogList />}  />
-              <Route path=':taxonomy/:slug' element={<BlogList />} />
-              <Route path=':year/:month/:date/:slug' element={<Blog />} />
-            </Route>
+            <Route path='/:postType/*' element={<BlogListRoutes />} />
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         </div>
