@@ -33,15 +33,15 @@ function Blog() {
 			{
 				! loading
 				&&
-				data.post
+				data?.post
 				&&
-				(<BlogContent blogData={data.post} />)
+				(<BlogContent blogData={data?.post} />)
 
 			}
 			{
 				! loading
 				&&
-				! data.post
+				! data?.post
 				&&
 				(<PageNotFound />)
 			}
