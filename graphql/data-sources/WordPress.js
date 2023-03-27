@@ -36,7 +36,9 @@ export class WordPress extends RESTDataSource {
 			return null;
 		}
 
-		return post[0];
+		return {
+			result: post['result'][0]
+		};
 
 	}
 

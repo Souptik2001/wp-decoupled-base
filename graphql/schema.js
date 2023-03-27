@@ -16,6 +16,7 @@ export const typeDefs = `#graphql
 	  content: Content
     author: User
     date: String
+    type: String
     excerpt: Excerpt
   }
 
