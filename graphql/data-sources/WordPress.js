@@ -37,7 +37,7 @@ export class WordPress extends RESTDataSource {
 		}
 
 		return {
-			result: post['result'][0]
+			response: post['response'][0]
 		};
 
 	}
@@ -51,7 +51,9 @@ export class WordPress extends RESTDataSource {
 	}
 
 	async parseBody(response) {
-		var responseBody = {};
+		var responseBody = {
+			'meta': {}
+		};
 		const contentType = response.headers.get('Content-Type');
 		const contentLength = response.headers.get('Content-Length');
 		if (
@@ -61,13 +63,13 @@ export class WordPress extends RESTDataSource {
 		  (contentType.startsWith('application/json') ||
 			contentType.endsWith('+json'))
 		) {
-		  responseBody['result'] = await response.json();
+		  responseBody['response'] = await response.json();
 		} else {
-			responseBody['result'] = await response.text();
+			responseBody['response'] = await response.text();
 		}
 		const totalPages = response.headers.get('X-WP-TotalPages');
 
-		responseBody['totalPages'] = totalPages;
+		responseBody['meta']['totalPages'] = totalPages;
 
 		return responseBody;
 	  }
