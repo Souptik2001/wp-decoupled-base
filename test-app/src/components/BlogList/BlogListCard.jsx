@@ -12,14 +12,16 @@ function BlogListCard({blogData, postType}) {
 	}, [blogData, postType]);
 
 	return (
-		<Link to={blogLink}>
-			<h2>{blogData.title.rendered}</h2>
-			<div
-				dangerouslySetInnerHTML={{
-					__html: blogData.excerpt.rendered
-				}}
-			/>
-		</Link>
+		<div className="blog-list-card">
+			<Link to={blogLink}>
+				<h2>{blogData.title.rendered}</h2>
+				<div
+					dangerouslySetInnerHTML={{
+						__html: blogData.excerpt.rendered
+					}}
+				/>
+			</Link>
+		</div>
 	)
 
 }
