@@ -26,10 +26,10 @@ function BlogList() {
 		document.title = `${postType} | ${taxonomy} | ${term}`;
 	}, [postType, taxonomy, term]);
 
-	var navigationLink = `/${postType}/filter`;
+	var navigationLink = `/${postType}`;
 
 	if (taxonomy && term) {
-		navigationLink += `/${taxonomy}/${term}`;
+		navigationLink += `/filter/${taxonomy}/${term}`;
 	}
 
 	return (
@@ -59,7 +59,7 @@ function BlogList() {
 				&&
 				(
 					<div>
-						<Link to={`${navigationLink}/${Math.max(pageNumber-1, 0)}`}>Prev</Link>
+						<Link to={`${navigationLink}/${Math.max(pageNumber-1, 0) === 0 ? '' : Math.max(pageNumber-1, 0)}`}>Prev</Link>
 						<Link to={`${navigationLink}/${Math.min(pageNumber+1, data?.posts?.pageInfo?.totalPages)}`}>Next</Link>
 					</div>
 				)

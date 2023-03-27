@@ -43,7 +43,7 @@ function BlogListRoutes() {
 	return (
 		<PostStoreContext.Provider value={postStore}>
 			<Routes>
-				<Route index element={<BlogList />}  />
+				<Route path=":page?" element={<BlogList />}  />
 				<Route path='filter/:taxonomy/:term/:page?' element={<BlogList />} />
 				<Route path=':year/:month/:date/:slug' element={<Blog />} />
 			</Routes>
