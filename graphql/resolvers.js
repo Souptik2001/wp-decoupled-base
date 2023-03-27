@@ -3,7 +3,9 @@ export const resolvers = {
 	Query: {
 		posts: postsResolver,
 		menu: menuResolver,
-		post: postResolver
+		post: postResolver,
+		taxonomies: taxonomiesResolver,
+		terms: termsResolver
 	},
 	PostReturn: {
 		pageInfo: postPageInfoResolver,
@@ -12,6 +14,31 @@ export const resolvers = {
 		author: userResolver,
 	}
 };
+
+async function termsResolver(parent, args, {dataSources}) {
+
+	const {taxonomy, restBase, page=1, perPage=10} = args;
+
+	var terms = await dataSources.wp.fetchTerms({
+		taxonomy,
+		restBase,
+		page,
+		perPage
+	});
+
+	return terms['response'];
+
+}
+
+async function taxonomiesResolver(parent, args, {dataSources}) {
+
+	const {postType} = args;
+
+	var taxonomies = await dataSources.wp.fetchTaxonomies(postType);
+
+	return Object.values( taxonomies['response'] );
+
+}
 
 async function userResolver(parent, args, {dataSources}) {
 

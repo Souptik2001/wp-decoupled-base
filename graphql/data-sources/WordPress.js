@@ -50,6 +50,37 @@ export class WordPress extends RESTDataSource {
 
 	}
 
+	async fetchTaxonomies(postType) {
+
+		var taxonomies = await this.get(
+			`wp/v2/taxonomies`,
+			{
+				params: {
+					type: postType
+				}
+			}
+		);
+
+		return taxonomies;
+
+	}
+
+	async fetchTerms({taxonomy, restBase, page, perPage}) {
+
+		var terms = await this.get(
+			`${restBase}/${taxonomy}`,
+			{
+				params: {
+					per_page: perPage,
+					page
+				}
+			}
+		);
+
+		return terms;
+
+	}
+
 	async parseBody(response) {
 		var responseBody = {
 			'meta': {}
@@ -72,5 +103,5 @@ export class WordPress extends RESTDataSource {
 		responseBody['meta']['totalPages'] = totalPages;
 
 		return responseBody;
-	  }
+	}
 }

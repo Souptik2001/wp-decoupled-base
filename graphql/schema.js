@@ -63,9 +63,30 @@ export const typeDefs = `#graphql
     items: [MenuItem]
   }
 
+  type Taxonomy {
+    name: String
+    slug: String!
+    description: String
+    hierarchical: Boolean
+    rest_base: String
+    rest_namespace: String
+  }
+
+  type Term {
+    id: Int!
+    count: Int
+    description: String
+    name: String
+    slug: String
+    taxonomy: String
+    parent: Int
+  }
+
   type Query {
     posts(postType: String!, limit: Int, offset: Int, after: String): PostReturn
     post(postType: String!, slug: String!): Post
     menu(id: Int, slug: String): Menu
+    taxonomies(postType: String!): [Taxonomy]
+    terms(taxonomy: String!, restBase: String!, page: Int, perPage: Int): [Term]
   }
 `;
