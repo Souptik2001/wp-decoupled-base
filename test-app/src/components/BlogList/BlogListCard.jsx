@@ -1,9 +1,18 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 
-function BlogListCard({blogData}) {
+function BlogListCard({blogData, postType}) {
+
+	const blogLink = useMemo(() => {
+		var dateObject = new Date(blogData?.date);
+		var year = dateObject.getFullYear();
+		var date = dateObject.getDate();
+		var month = dateObject.getMonth();
+		return `/${postType}/${year}/${month}/${date}/${blogData?.slug}`;
+	}, [blogData, postType]);
 
 	return (
-		<Link>
+		<Link to={blogLink}>
 			<h2>{blogData.title.rendered}</h2>
 			<div
 				dangerouslySetInnerHTML={{

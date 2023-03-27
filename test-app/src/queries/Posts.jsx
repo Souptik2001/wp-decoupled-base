@@ -9,6 +9,7 @@ export const GET_POSTS = gql`
 				totalPages
 			}
 			posts {
+				type
 				excerpt {
 					rendered
 				}

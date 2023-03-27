@@ -48,7 +48,7 @@ function BlogList() {
 				&&
 				data?.posts?.posts.map((val) => {
 					return (
-						<BlogListCard key={val.slug} blogData={val} />
+						<BlogListCard key={val.slug} blogData={val} postType={postType} />
 					);
 				})
 			}
