@@ -17,11 +17,11 @@ export const resolvers = {
 
 async function termsResolver(parent, args, {dataSources}) {
 
-	const {taxonomy, restBase, page=1, perPage=10} = args;
+	const {taxonomy, restNamespace, page=1, perPage=10} = args;
 
 	var terms = await dataSources.wp.fetchTerms({
 		taxonomy,
-		restBase,
+		restNamespace,
 		page,
 		perPage
 	});
@@ -83,7 +83,7 @@ function postPageInfoResolver(parent, args) {
 }
 
 async function postsResolver(parent, args, {dataSources}) {
-	const {postType, limit=10, offset, after} = args;
+	const {postType, limit=10, offset, after, taxonomy, term=0} = args;
 	var queryParams = {};
 	if(limit) {
 		queryParams['per_page'] = (limit+1).toString();
@@ -93,6 +93,10 @@ async function postsResolver(parent, args, {dataSources}) {
 		queryParams['before'] = beforeDate;
 	} else if(offset) {
 		queryParams['offset'] = offset.toString();
+	}
+
+	if (taxonomy && taxonomy !== "") {
+		queryParams[ taxonomy ] = term;
 	}
 
 	try {

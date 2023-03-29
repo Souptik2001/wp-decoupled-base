@@ -65,10 +65,10 @@ export class WordPress extends RESTDataSource {
 
 	}
 
-	async fetchTerms({taxonomy, restBase, page, perPage}) {
+	async fetchTerms({taxonomy, restNamespace, page, perPage}) {
 
 		var terms = await this.get(
-			`${restBase}/${taxonomy}`,
+			`${restNamespace}/${taxonomy}`,
 			{
 				params: {
 					per_page: perPage,
