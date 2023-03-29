@@ -20,7 +20,9 @@ function BlogList() {
 				limit: 10,
 				postType: postType,
 				offset: Math.max(pageNumber-1, 0)*10,
-			}
+				taxonomy: taxonomy,
+				term: ( posts[postType] && posts[postType][taxonomy] && posts[postType][taxonomy][term] ) ? posts[postType][taxonomy][term]['id'] : 0
+			},
 		}
 	);
 
@@ -56,7 +58,7 @@ function BlogList() {
 						}
 						<Link className="is-active" to={`${navigationLink}/${pageNumber}`}>{pageNumber}</Link>
 						{
-							pageNumber+1 <= data?.posts?.pageInfo?.totalPages+1
+							data?.posts?.pageInfo?.hasNextPage
 							&&
 							<Link to={`${navigationLink}/${pageNumber+1}`}>{pageNumber+1}</Link>
 						}

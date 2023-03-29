@@ -1,25 +1,27 @@
 import { createContext, useReducer } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import Blog from "./Blog";
 import BlogList from "./BlogList";
+import Filters from "./BlogList/Filters";
 
 export const PostStoreContext = createContext();
 
 function updatePosts(state, action) {
-	const {taxonomy, term, postType, page, total} = action;
+	const {taxonomy, term, postType, page, total, termID} = action;
 
 	if ( ! state[postType] ) {
 		state[postType] = {};
 	}
 
-	if ( ! taxonomy && ! state[postType][taxonomy] ) {
+	if ( taxonomy && ! state[postType][taxonomy] ) {
 		state[postType][taxonomy] = {};
 	}
 
 	if ( taxonomy && term ) {
 		state[postType][taxonomy][term] = {
 			currentPage: page,
-			totalPages: total
+			totalPages: total,
+			id: termID
 		}
 	} else {
 		state[postType]['na'] = {
@@ -28,10 +30,12 @@ function updatePosts(state, action) {
 		}
 	}
 
-	return state;
+	return {...state};
 }
 
 function BlogListRoutes() {
+
+	const {postType=""} = useParams();
 
 	const [posts, setPosts] = useReducer(updatePosts, {});
 
@@ -42,6 +46,7 @@ function BlogListRoutes() {
 
 	return (
 		<PostStoreContext.Provider value={postStore}>
+			<Filters postType={postType} />
 			<Routes>
 				<Route path=":page?" element={<BlogList />}  />
 				<Route path='filter/:taxonomy/:term/:page?' element={<BlogList />} />

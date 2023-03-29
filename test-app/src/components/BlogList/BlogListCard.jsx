@@ -14,10 +14,10 @@ function BlogListCard({blogData, postType}) {
 	return (
 		<div className="blog-list-card">
 			<Link to={blogLink}>
-				<h2>{blogData.title.rendered}</h2>
+				<h2>{blogData?.title?.rendered}</h2>
 				<div
 					dangerouslySetInnerHTML={{
-						__html: blogData.excerpt.rendered
+						__html: blogData?.excerpt?.rendered
 					}}
 				/>
 			</Link>

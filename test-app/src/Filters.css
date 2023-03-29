@@ -1,0 +1,25 @@
+.tax-filter-section .tax-filter-list {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
+.tax-filter-section .tax-filter-list a {
+	background-color: transparent;
+	text-decoration: none;
+	padding: 20px;
+	border-radius: 20px;
+	border: 1px solid #c9c9c9b6;
+	transition: border 0.2s;
+}
+
+.tax-filter-section .tax-filter-list a:hover {
+	border: 1px solid #575757b6;
+}
+
+.filter-section {
+	margin-bottom: 50px;
+}
