@@ -18,11 +18,12 @@ function updatePosts(state, action) {
 	}
 
 	if ( taxonomy && term ) {
-		state[postType][taxonomy][term] = {
-			currentPage: page,
-			totalPages: total,
-			id: termID
+		if ( ! state[postType][taxonomy][term] ) {
+			state[postType][taxonomy][term] = {};
 		}
+		state[postType][taxonomy][term]['currentPage'] = page ? page : state[postType][taxonomy][term]['currentPage'];
+		state[postType][taxonomy][term]['totalPages'] = total ? total : state[postType][taxonomy][term]['totalPages'];
+		state[postType][taxonomy][term]['id'] = termID ? termID : state[postType][taxonomy][term]['id'];
 	} else {
 		state[postType]['na'] = {
 			currentPage: page,

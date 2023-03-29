@@ -28,7 +28,13 @@ function BlogList() {
 
 	useEffect(() => {
 		document.title = `${postType} | ${taxonomy} | ${term}`;
-	}, [postType, taxonomy, term]);
+		setPosts({
+			taxonomy,
+			postType,
+			term,
+			page
+		});
+	}, [postType, taxonomy, term, page, setPosts]);
 
 	var navigationLink = `/${postType}`;
 

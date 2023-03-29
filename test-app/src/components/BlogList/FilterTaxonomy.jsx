@@ -9,7 +9,7 @@ function FilterTaxonomy({taxonomy}) {
 
 	const {postType="", taxonomy: taxonomyParam, term} = useParams();
 
-	const {setPosts} = useContext(PostStoreContext);
+	const {posts, setPosts} = useContext(PostStoreContext);
 
 	const {data} = useQuery(
 		GET_TERMS,
@@ -27,7 +27,7 @@ function FilterTaxonomy({taxonomy}) {
 								taxonomy: taxonomy?.rest_base,
 								term: val.slug,
 								postType: postType,
-								page: 0,
+								page: 1,
 								total: val.count,
 								termID: val.id
 							})
@@ -48,8 +48,12 @@ function FilterTaxonomy({taxonomy}) {
 				&&
 				(
 					data?.terms.map((val) => {
+						var filterPage = "";
+						if ( posts[postType] && posts[postType][taxonomy?.rest_base] && posts[postType][taxonomy?.rest_base][val.slug] && posts[postType][taxonomy?.rest_base][val.slug]['currentPage'] > 1 ) {
+							filterPage = posts[postType][taxonomy?.rest_base][val.slug]['currentPage'];
+						}
 						return (
-							<Link key={val.slug} to={`filter/${taxonomy?.rest_base}/${val.slug}`} className={(taxonomy?.rest_base === taxonomyParam && val?.slug === term) ? "selected-filter" : ""}>{val.name}</Link>
+							<Link key={val.slug} to={`filter/${taxonomy?.rest_base}/${val.slug}/${filterPage}`} className={(taxonomy?.rest_base === taxonomyParam && val?.slug === term) ? "selected-filter" : ""}>{val.name}</Link>
 						)
 					})
 				)
