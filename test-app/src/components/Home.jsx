@@ -5,7 +5,7 @@ function Home() {
 	return (
 		<>
 		<h1>👋</h1>
-		<Link to='/posts'>Filter Posts</Link>
+		<Link to='/post'>Filter Posts</Link>
 		</>
 	);
 
