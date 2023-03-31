@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import BlogListRoutes from './components/BlogListRoutes';
@@ -6,6 +7,10 @@ import Navbar from './components/Navbar';
 import PageNotFound from './components/PageNotFound';
 
 function App() {
+
+  useEffect(() => {
+		document.title = "WP Decoupled";
+	}, []);
 
     return (
       <div className="App">

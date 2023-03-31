@@ -8,10 +8,12 @@ import BlogListCard from "./BlogList/BlogListCard";
 import { PostStoreContext } from "./BlogListRoutes";
 
 function BlogList() {
-	const {postType="", taxonomy="", term="", page=1} = useParams();
+	const {taxonomy="", term="", page=1} = useParams();
 	const pageNumber = parseInt(page);
 
 	const {posts, setPosts, postTypeData} = useContext(PostStoreContext);
+
+	const postType = postTypeData?.slug;
 
 	const {data, loading} = useQuery(
 		GET_POSTS,
@@ -27,14 +29,14 @@ function BlogList() {
 	);
 
 	useEffect(() => {
-		document.title = `${postType} | ${taxonomy} | ${term}`;
+		document.title = ( taxonomy && term ) ? `${postTypeData?.name} | ${taxonomy} | ${term}` : postTypeData?.name;
 		setPosts({
 			taxonomy,
 			postType,
 			term,
 			page
 		});
-	}, [postType, taxonomy, term, page, setPosts]);
+	}, [postType, postTypeData, taxonomy, term, page, setPosts]);
 
 	var navigationLink = `/${postType}`;
 

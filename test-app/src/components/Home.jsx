@@ -1,6 +1,11 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function Home() {
+
+	useEffect(() => {
+		document.title = "WP Decoupled";
+	}, []);
 
 	return (
 		<>
