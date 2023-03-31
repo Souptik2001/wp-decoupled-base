@@ -5,7 +5,8 @@ export const resolvers = {
 		menu: menuResolver,
 		post: postResolver,
 		taxonomies: taxonomiesResolver,
-		terms: termsResolver
+		terms: termsResolver,
+		postType: postTypeResolver
 	},
 	PostReturn: {
 		pageInfo: postPageInfoResolver,
@@ -14,6 +15,22 @@ export const resolvers = {
 		author: userResolver,
 	}
 };
+
+async function postTypeResolver(parent, args, {dataSources}) {
+
+	const {postType} = args;
+
+	if ( ! postType ) {
+		return null;
+	}
+
+	var postTypeDetails = dataSources.wp.fetchPostType({
+		postType
+	});
+
+	return postTypeDetails;
+
+}
 
 async function termsResolver(parent, args, {dataSources}) {
 

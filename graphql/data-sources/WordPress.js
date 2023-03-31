@@ -81,6 +81,16 @@ export class WordPress extends RESTDataSource {
 
 	}
 
+	async fetchPostType({postType}) {
+
+		var typeDetails = await this.get(
+			`wp/v2/types/${postType}`,
+		);
+
+		return typeDetails['response'];
+
+	}
+
 	async parseBody(response) {
 		var responseBody = {
 			'meta': {}
@@ -104,4 +114,5 @@ export class WordPress extends RESTDataSource {
 
 		return responseBody;
 	}
+
 }
