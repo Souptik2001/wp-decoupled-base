@@ -58,6 +58,11 @@
 	list-style: none;
 	border: 1px orange solid;
 	visibility: hidden;
+	z-index: 100;
+}
+
+.Navbar .menu .menu-item .submenu li:not(:first-child) {
+	margin-top: 20px;
 }
 
 .Navbar .menu .menu-item .submenu.is-visible {
