@@ -1,16 +1,20 @@
 import { useQuery } from "@apollo/client";
+import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import { GET_TAXONOMIES } from "../../queries/Taxonomies";
+import { PostStoreContext } from "../BlogListRoutes";
 import FilterTaxonomy from "./FilterTaxonomy";
 
-function Filters({postType}) {
+function Filters() {
 
-	// TODO: Fetch all the terms from above.
+	const { postTypeData } = useContext(PostStoreContext);
+
+	// TODO: Fetch all the terms from above using automatic pagination.
 	const {data: taxonomies} = useQuery(
 		GET_TAXONOMIES,
 		{
 			variables: {
-				postType: 'post' // TODO: Make this dynamic.
+				postType: postTypeData?.slug
 			},
 		}
 	);

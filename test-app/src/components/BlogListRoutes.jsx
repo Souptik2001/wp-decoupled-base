@@ -1,8 +1,11 @@
+import { useQuery } from "@apollo/client";
 import { createContext, useReducer } from "react";
 import { Route, Routes, useParams } from "react-router-dom";
+import { GET_POST_TYPE } from "../queries/PostType";
 import Blog from "./Blog";
 import BlogList from "./BlogList";
 import Filters from "./BlogList/Filters";
+import PageNotFound from "./PageNotFound";
 
 export const PostStoreContext = createContext();
 
@@ -40,21 +43,52 @@ function BlogListRoutes() {
 
 	const [posts, setPosts] = useReducer(updatePosts, {});
 
+	const {data, loading} = useQuery(
+		GET_POST_TYPE,
+		{
+			variables: {
+				type: postType
+			}
+		}
+	);
+
+	if (loading) {
+		return(
+			<h1>Loading...</h1>
+		)
+	}
+
 	const postStore = {
 		posts,
-		setPosts
+		setPosts,
+		postTypeData: data?.postType
 	};
 
 	return (
-		<PostStoreContext.Provider value={postStore}>
-			<Routes>
-				<Route element={<Filters postType={postType} />}>
-					<Route path=":page?" element={<BlogList />}  />
-					<Route path='filter/:taxonomy/:term/:page?' element={<BlogList />} />
-					<Route path=':year/:month/:date/:slug' element={<Blog />} />
-				</Route>
-			</Routes>
-		</PostStoreContext.Provider>
+		<div>
+			{
+				! loading
+				&&
+				data?.postType
+				&&
+				<PostStoreContext.Provider value={postStore}>
+					<Routes>
+						<Route element={<Filters />}>
+							<Route path=":page?" element={<BlogList />}  />
+							<Route path='filter/:taxonomy/:term/:page?' element={<BlogList />} />
+							<Route path=':year/:month/:date/:slug' element={<Blog />} />
+						</Route>
+					</Routes>
+				</PostStoreContext.Provider>
+			}
+			{
+				! loading
+				&&
+				! data?.postType
+				&&
+				(<PageNotFound />)
+			}
+		</div>
 	)
 
 }

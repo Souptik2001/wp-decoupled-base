@@ -11,14 +11,14 @@ function BlogList() {
 	const {postType="", taxonomy="", term="", page=1} = useParams();
 	const pageNumber = parseInt(page);
 
-	const {posts, setPosts} = useContext(PostStoreContext);
+	const {posts, setPosts, postTypeData} = useContext(PostStoreContext);
 
 	const {data, loading} = useQuery(
 		GET_POSTS,
 		{
 			variables: {
 				limit: 10,
-				postType: postType,
+				postType: postTypeData?.rest_base,
 				offset: Math.max(pageNumber-1, 0)*10,
 				taxonomy: taxonomy,
 				term: ( posts[postType] && posts[postType][taxonomy] && posts[postType][taxonomy][term] ) ? posts[postType][taxonomy][term]['id'] : 0
