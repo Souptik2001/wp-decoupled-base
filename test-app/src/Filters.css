@@ -23,3 +23,7 @@
 .filter-section {
 	margin-bottom: 50px;
 }
+
+.tax-filter-section .tax-filter-list a.selected-filter {
+	background-color: #c9c9c9b6;
+}

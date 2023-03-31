@@ -39,6 +39,12 @@ function FilterTaxonomy({taxonomy}) {
 		}
 	);
 
+	var baseLink = '';
+
+	if ( posts[postType] && posts[postType]['no filter'] && parseInt( posts[postType]['no filter']['currentPage'] ) > 1 ) {
+		baseLink = posts[postType]['no filter']['currentPage'];
+	}
+
 	return (
 		<div className="tax-filter-section">
 			<h4>{taxonomy?.name}</h4>
@@ -49,11 +55,11 @@ function FilterTaxonomy({taxonomy}) {
 				(
 					data?.terms.map((val) => {
 						var filterPage = "";
-						if ( posts[postType] && posts[postType][taxonomy?.rest_base] && posts[postType][taxonomy?.rest_base][val.slug] && posts[postType][taxonomy?.rest_base][val.slug]['currentPage'] > 1 ) {
+						if ( posts[postType] && posts[postType][taxonomy?.rest_base] && posts[postType][taxonomy?.rest_base][val.slug] && parseInt( posts[postType][taxonomy?.rest_base][val.slug]['currentPage'] ) > 1 ) {
 							filterPage = posts[postType][taxonomy?.rest_base][val.slug]['currentPage'];
 						}
 						return (
-							<Link key={val.slug} to={`filter/${taxonomy?.rest_base}/${val.slug}/${filterPage}`} className={(taxonomy?.rest_base === taxonomyParam && val?.slug === term) ? "selected-filter" : ""}>{val.name}</Link>
+							<Link key={val.slug} to={(taxonomy?.rest_base === taxonomyParam && val?.slug === term) ? baseLink : `filter/${taxonomy?.rest_base}/${val.slug}/${filterPage}`} className={(taxonomy?.rest_base === taxonomyParam && val?.slug === term) ? "selected-filter" : ""}>{val.name}</Link>
 						)
 					})
 				)

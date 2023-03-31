@@ -25,7 +25,7 @@ function updatePosts(state, action) {
 		state[postType][taxonomy][term]['totalPages'] = total ? total : state[postType][taxonomy][term]['totalPages'];
 		state[postType][taxonomy][term]['id'] = termID ? termID : state[postType][taxonomy][term]['id'];
 	} else {
-		state[postType]['na'] = {
+		state[postType]['no filter'] = {
 			currentPage: page,
 			totalPages: total
 		}
@@ -47,11 +47,12 @@ function BlogListRoutes() {
 
 	return (
 		<PostStoreContext.Provider value={postStore}>
-			<Filters postType={postType} />
 			<Routes>
-				<Route path=":page?" element={<BlogList />}  />
-				<Route path='filter/:taxonomy/:term/:page?' element={<BlogList />} />
-				<Route path=':year/:month/:date/:slug' element={<Blog />} />
+				<Route element={<Filters postType={postType} />}>
+					<Route path=":page?" element={<BlogList />}  />
+					<Route path='filter/:taxonomy/:term/:page?' element={<BlogList />} />
+					<Route path=':year/:month/:date/:slug' element={<Blog />} />
+				</Route>
 			</Routes>
 		</PostStoreContext.Provider>
 	)

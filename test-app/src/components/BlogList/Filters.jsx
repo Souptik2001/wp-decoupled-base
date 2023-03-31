@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/client";
+import { Outlet } from "react-router-dom";
 import { GET_TAXONOMIES } from "../../queries/Taxonomies";
 import FilterTaxonomy from "./FilterTaxonomy";
 
@@ -15,17 +16,20 @@ function Filters({postType}) {
 	);
 
 	return (
-		<div className="filter-section">
-			{
-				taxonomies?.taxonomies
-				&&
-				taxonomies?.taxonomies.map((val) => {
-					return (
-						<FilterTaxonomy key={val.slug} taxonomy={val} />
-					);
-				})
-			}
-		</div>
+		<>
+			<div className="filter-section">
+				{
+					taxonomies?.taxonomies
+					&&
+					taxonomies?.taxonomies.map((val) => {
+						return (
+							<FilterTaxonomy key={val.slug} taxonomy={val} />
+						);
+					})
+				}
+			</div>
+			<Outlet />
+		</>
 	);
 
 }
