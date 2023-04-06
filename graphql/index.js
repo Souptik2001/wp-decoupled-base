@@ -7,6 +7,8 @@ import { typeDefs } from './schema.js';
 
 dotenv.config();
 
+var authToken = 'Basic ' + Buffer.from( `${process.env.WORDPRESS_USER}:${process.env.WORDPRESS_PASS}` ).toString("base64");
+
 const server = new ApolloServer({ typeDefs, resolvers });
 const { url } = await startStandaloneServer(server, {
   context: async ({ req }) => {
@@ -14,7 +16,8 @@ const { url } = await startStandaloneServer(server, {
       token: req.headers.token,
       dataSources: {
         wp: new WordPress({
-          'url': process.env.WORDPRESS_REST_API_URL
+          'url': process.env.WORDPRESS_REST_API_URL,
+          authToken
         })
       }
     }

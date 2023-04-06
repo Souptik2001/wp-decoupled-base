@@ -3,10 +3,15 @@ import { RESTDataSource } from "@apollo/datasource-rest";
 
 export class WordPress extends RESTDataSource {
 
-	constructor ({url}) {
+	constructor ({url, authToken}) {
 		super();
 
 		this.baseURL = url;
+		this.authToken = authToken;
+	}
+
+	willSendRequest(path, request) {
+		request.headers['Authorization'] = this.authToken;
 	}
 
 	async fetchMenu(menuIDOrSlug) {
@@ -88,6 +93,21 @@ export class WordPress extends RESTDataSource {
 		);
 
 		return typeDetails['response'];
+
+	}
+
+	async updatePostMeta({postID, metaInput}) {
+
+		var result = await this.post(
+			`wp/v2/posts/${postID}`,
+			{
+				body: {
+					meta: metaInput
+				}
+			}
+		);
+
+		return result;
 
 	}
 

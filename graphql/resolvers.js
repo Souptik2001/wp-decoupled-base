@@ -8,6 +8,9 @@ export const resolvers = {
 		terms: termsResolver,
 		postType: postTypeResolver
 	},
+	Mutation: {
+		updatePostMeta: updatePostMetaResolver,
+	},
 	PostReturn: {
 		pageInfo: postPageInfoResolver,
 	},
@@ -15,6 +18,34 @@ export const resolvers = {
 		author: userResolver,
 	}
 };
+
+async function updatePostMetaResolver(parent, args, {dataSources}) {
+
+	const {postID, metaInput} = args;
+
+	const metaInputFormatted = {};
+
+	metaInput.forEach(element => {
+		metaInputFormatted[element.meta_key] = element.meta_value;
+	});
+
+	try {
+		const data = await dataSources.wp.updatePostMeta({
+			postID,
+			metaInput: metaInputFormatted
+		});
+
+		return {
+			success: true,
+			data: data['response']
+		};
+	} catch {
+		return {
+			success: false,
+			data: null
+		}
+	}
+}
 
 async function postTypeResolver(parent, args, {dataSources}) {
 
@@ -24,7 +55,7 @@ async function postTypeResolver(parent, args, {dataSources}) {
 		return null;
 	}
 
-	var postTypeDetails = dataSources.wp.fetchPostType({
+	var postTypeDetails = await dataSources.wp.fetchPostType({
 		postType
 	});
 

@@ -3,10 +3,18 @@ export const typeDefs = `#graphql
     pageInfo: PageInfo
   }
 
+  interface MutationReturnDataFormat {
+    success: Boolean
+  }
+
   type PageInfo {
     endCursor: String
     hasNextPage: Boolean
     totalPages: Int
+  }
+
+  type PostMeta {
+    post_views: Int
   }
 
   type Post {
@@ -18,6 +26,7 @@ export const typeDefs = `#graphql
     date: String
     type: String
     excerpt: Excerpt
+    meta: PostMeta
   }
 
   type User {
@@ -90,6 +99,16 @@ export const typeDefs = `#graphql
     rest_namespace: String,
   }
 
+  input MetaInput {
+    meta_key: String!,
+    meta_value: Int!
+  }
+
+  type UpdatePostMetaResponse implements MutationReturnDataFormat {
+    success: Boolean
+    data: Post
+  }
+
   type Query {
     posts(postType: String!, limit: Int, offset: Int, after: String, taxonomy: String, term: Int): PostReturn
     post(postType: String!, slug: String!): Post
@@ -97,5 +116,9 @@ export const typeDefs = `#graphql
     taxonomies(postType: String!): [Taxonomy]
     terms(taxonomy: String!, restNamespace: String!, page: Int, perPage: Int): [Term],
     postType(postType: String!): PostType
+  }
+
+  type Mutation {
+    updatePostMeta(postID: Int, metaInput: [MetaInput!]!): UpdatePostMetaResponse
   }
 `;
