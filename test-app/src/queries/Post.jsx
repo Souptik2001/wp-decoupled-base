@@ -18,6 +18,9 @@ export const GET_POST = gql`
 				slug
 				link
 			}
+			meta {
+				post_views
+			}
 		}
 	}
 `;
