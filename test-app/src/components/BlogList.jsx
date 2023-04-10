@@ -1,8 +1,8 @@
 import { useQuery } from "@apollo/client";
 import { useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import '../BlogList.css';
-import '../Navigation.css';
+import '../assets/css/BlogList.css';
+import '../assets/css/Navigation.css';
 import { GET_POSTS } from "../queries/Posts";
 import BlogListCard from "./BlogList/BlogListCard";
 import { PostStoreContext } from "./BlogListRoutes";

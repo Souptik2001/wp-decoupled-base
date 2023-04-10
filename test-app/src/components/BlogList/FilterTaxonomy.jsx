@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
-import '../../Filters.css';
+import '../../assets/css/Filters.css';
 import { GET_TERMS } from "../../queries/Terms";
 import { PostStoreContext } from "../BlogListRoutes";
 
