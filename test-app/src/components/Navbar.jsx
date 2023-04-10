@@ -18,7 +18,11 @@ function Navbar() {
 	return (
 		<nav className="Navbar">
 			<Link to="/">Logo</Link>
-			<Menu menu={data}/>
+			{
+				data
+				&&
+				<Menu menu={data}/>
+			}
 		</nav>
 	);
 
