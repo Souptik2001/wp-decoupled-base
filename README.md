@@ -11,8 +11,11 @@ A WordPress decoupled setup. The total setup is divided into three parts -
 - WordPress setup -
 	- Create a local WordPress setup.
 	- Copy the backend directory's content to `wp-content` folder.
-	- Optional - Activate the `wp-rest-api-v2-menus` plugin. (if you want to see the nav-menus).
+	- Optional - Activate the `wp-rest-api-v2-menus` plugin - `wp plugin activate wp-rest-api-v2-menus`  (if you want to see the nav-menus).
+	  - The `primary menu` will be displayed on the nav-menu. So, you have to create a menu and assign that to `primary menu`.
+	- Activate the `wordpress-importer` plugin - `wp plugin activate wordpress-importer`.
 	- Import the sample data provided using - `wp import <file> --authors=create`.
+	- Change the permalink structure to some pretty permalink structure.
 - GraphQL setup -
 	- Go to the `graphql` directory of the project.
 	- Run `nvm use`.
