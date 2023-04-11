@@ -17,16 +17,18 @@ A WordPress decoupled setup. The total setup is divided into three parts -
 	  - The `primary menu` will be displayed on the nav-menu. So, you have to create a menu and assign that to `primary menu`.
 	- Activate the `wordpress-importer` plugin - `wp plugin activate wordpress-importer`.
 	- Import the sample data provided using - `wp import <file> --authors=create`.
-	- Change the permalink structure to some pretty permalink structure.
+	- Change the permalink structure to some pretty permalink structure - `wp rewrite structure '/%year%/%monthnum%/%day%/%postname%/'`
 - GraphQL setup -
 	- Go to the `graphql` directory of the project.
 	- Run `nvm use`.
 	- Run `npm install`.
+	- Create a `.env` file from `sample.env` file. And fill up the required values.
 	- Run `npm run start` or `npm run dev`(runs `nodemon`).
 - React setup -
 	- Go to `test-app` directory.
 	- Run `nvm use`.
 	- Run `npm install`.
+	- Create a `.env` file from `sample.env` file. And fill up the required values.
 	- Run `npm run serve` (To create production-ready build).
 	- Please note that if you run development build, using `npm run start` there will be one issue -
 	  - You will see that the post views in post single page is increasing by 2 instead of 1. This is because of React Strict mode's twice running `useEffect()` hook on development build.
