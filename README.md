@@ -5,6 +5,8 @@ A WordPress decoupled setup. The total setup is divided into three parts -
 - **GraphQL Server** - GraphQL runs as a separate service, which is used by the frontend React application to consume data. GraphQL uses the WordPress as one of its data source (in this case the one and only data source) to consume data and serve that to frontend application.
 - **Frontend React Application** - The React application consumes the data from the the GraphQL server and displays that to the user.
 
+![Decoupled WordPress Banner](./extra/Logo.png)
+
 ### Local setup
 
 - Clone the repository.
