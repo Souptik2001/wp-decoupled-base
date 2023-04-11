@@ -6,6 +6,7 @@ import '../assets/css/Navigation.css';
 import { GET_POSTS } from "../queries/Posts";
 import BlogListCard from "./BlogList/BlogListCard";
 import { PostStoreContext } from "./BlogListRoutes";
+import PageNotFound from "./PageNotFound";
 
 function BlogList() {
 	const {taxonomy="", term="", page=1} = useParams();
@@ -15,7 +16,7 @@ function BlogList() {
 
 	const postType = postTypeData?.slug;
 
-	const {data, loading} = useQuery(
+	const {data, loading, error} = useQuery(
 		GET_POSTS,
 		{
 			variables: {
@@ -44,6 +45,12 @@ function BlogList() {
 		navigationLink += `/filter/${taxonomy}/${term}`;
 	}
 
+	if ( error ) {
+		return (
+			<h1>Error fetching data.</h1>
+		)
+	}
+
 	return (
 		<div>
 			{
@@ -52,9 +59,23 @@ function BlogList() {
 				<h1>Loading...</h1>
 			}
 			{
+				data?.posts
+				&&
+				data?.posts?.posts.length <= 0
+				&&
+				(
+					<>
+						<PageNotFound />
+						<em>Back to <Link to={navigationLink}>First Page</Link></em>
+					</>
+				)
+			}
+			{
 				! loading
 				&&
 				data?.posts?.pageInfo
+				&&
+				data?.posts?.posts.length > 0
 				&&
 				(
 					<div className="navigation">
@@ -70,13 +91,11 @@ function BlogList() {
 							&&
 							<Link to={`${navigationLink}/${pageNumber+1}`}>{pageNumber+1}</Link>
 						}
-						<Link to={`${navigationLink}/${Math.min(pageNumber+1, data?.posts?.pageInfo?.totalPages+1)}`}>Next</Link>
+						<Link to={`${navigationLink}/${Math.min(pageNumber+1, data?.posts?.pageInfo?.totalPages)}`}>Next</Link>
 					</div>
 				)
 			}
 			{
-				! loading
-				&&
 				data?.posts
 				&&
 				data?.posts?.posts.length > 0

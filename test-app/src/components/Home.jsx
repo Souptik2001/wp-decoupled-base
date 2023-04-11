@@ -10,7 +10,7 @@ function Home() {
 	return (
 		<>
 		<h1>👋</h1>
-		<Link to='/post'>Filter Posts</Link>
+		<Link to='/blog'>See Blogs</Link>
 		</>
 	);
 

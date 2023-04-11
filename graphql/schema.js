@@ -119,6 +119,6 @@ export const typeDefs = `#graphql
   }
 
   type Mutation {
-    updatePostMeta(postID: Int, metaInput: [MetaInput!]!): UpdatePostMetaResponse
+    updatePostMeta(postType: String, postID: Int, metaInput: [MetaInput!]!): UpdatePostMetaResponse
   }
 `;

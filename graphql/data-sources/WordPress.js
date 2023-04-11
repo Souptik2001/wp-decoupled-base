@@ -96,10 +96,10 @@ export class WordPress extends RESTDataSource {
 
 	}
 
-	async updatePostMeta({postID, metaInput}) {
+	async updatePostMeta({postType, postID, metaInput}) {
 
 		var result = await this.post(
-			`wp/v2/posts/${postID}`,
+			`wp/v2/${postType}/${postID}`,
 			{
 				body: {
 					meta: metaInput
@@ -128,9 +128,9 @@ export class WordPress extends RESTDataSource {
 		} else {
 			responseBody['response'] = await response.text();
 		}
-		const totalPages = response.headers.get('X-WP-TotalPages');
+		const totalPosts = response.headers.get('x-wp-total');
 
-		responseBody['meta']['totalPages'] = totalPages;
+		responseBody['meta']['totalPosts'] = totalPosts;
 
 		return responseBody;
 	}

@@ -24,6 +24,7 @@ function BlogContent({blogData}) {
 		UPDATE_POST_META,
 		{
 			variables: {
+				postType: postTypeData?.rest_base,
 				postID: blogData?.id,
 				metaInput: [{
 					meta_key: 'post_views',
@@ -33,6 +34,7 @@ function BlogContent({blogData}) {
 		}
 	);
 
+	// This is executing twice because of React strict mode. Because of this when running on development mode it is running twice.
 	useEffect(() => {
 		increasePostViews();
 		client.cache.updateQuery({

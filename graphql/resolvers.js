@@ -21,7 +21,7 @@ export const resolvers = {
 
 async function updatePostMetaResolver(parent, args, {dataSources}) {
 
-	const {postID, metaInput} = args;
+	const {postType, postID, metaInput} = args;
 
 	const metaInputFormatted = {};
 
@@ -31,6 +31,7 @@ async function updatePostMetaResolver(parent, args, {dataSources}) {
 
 	try {
 		const data = await dataSources.wp.updatePostMeta({
+			postType,
 			postID,
 			metaInput: metaInputFormatted
 		});
@@ -152,7 +153,8 @@ async function postsResolver(parent, args, {dataSources}) {
 			queryParams,
 			postType,
 		});
-		var totalPages = posts['meta']['totalPages'];
+		var totalPosts = posts['meta']['totalPosts'];
+		var totalPages = Math.ceil( totalPosts / limit );
 		posts = posts['response'];
 		var hasNextPage = posts.length >= limit+1
 		if(hasNextPage) {
