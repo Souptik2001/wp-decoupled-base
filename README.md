@@ -12,8 +12,7 @@ A WordPress decoupled setup. The total setup is divided into three parts -
 	- Create a local WordPress setup.
 	- Copy the backend directory's content to `wp-content` folder.
 	- Optional - Activate the `wp-rest-api-v2-menus` plugin. (if you want to see the nav-menus).
-	- Import the sample database provided using - `wp import <file> --authors=create`.
-	- Search replace...
+	- Import the sample data provided using - `wp import <file> --authors=create`.
 - GraphQL setup -
 	- Go to the `graphql` directory of the project.
 	- Run `nvm use`.
@@ -27,4 +26,7 @@ A WordPress decoupled setup. The total setup is divided into three parts -
 	- Please note that if you run development build, using `npm run start` there will be one issue -
 	  - You will see that the post views in post single page is increasing by 2 instead of 1. This is because of React Strict mode's twice running `useEffect()` hook on development build.
 
-### Points to note
+### TODO
+
+- Unit Testing. Have to write the following unit tests -
+  - [ ] Surely something..
