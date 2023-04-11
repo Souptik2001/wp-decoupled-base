@@ -16,6 +16,8 @@ A WordPress decoupled setup. The total setup is divided into three parts -
 	- Optional - Activate the `wp-rest-api-v2-menus` plugin - `wp plugin activate wp-rest-api-v2-menus`  (if you want to see the nav-menus).
 	  - The `primary menu` will be displayed on the nav-menu. So, you have to create a menu and assign that to `primary menu`.
 	- Activate the `wordpress-importer` plugin - `wp plugin activate wordpress-importer`.
+	- The custom post type I have registered in a mu-plugin, `test.php` (did this because this was a dummy project, ideally should have created a plugin). Couldn't flush rewrite rule because of using mu-plugin. But rewrite rules will not be required in this case. And in the next steps we will be changing the rewrite rule, so it will be automatically flushed.
+	  - When we create a plugin instead of mu-plugin, then if the plugin is deactivated then the site would break. In that case on VIP environment we can activate those plugins through code, to make sure they are always active.
 	- Import the sample data provided using - `wp import <file> --authors=create`.
 	- Change the permalink structure to some pretty permalink structure - `wp rewrite structure '/%year%/%monthnum%/%day%/%postname%/'`
 - GraphQL setup -
