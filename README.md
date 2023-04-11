@@ -23,6 +23,8 @@ A WordPress decoupled setup. The total setup is divided into three parts -
 	- Go to `test-app` directory.
 	- Run `nvm use`.
 	- Run `npm install`.
-	- Run `npm start`.
+	- Run `npm run serve` (To create production-ready build).
+	- Please note that if you run development build, using `npm run start` there will be one issue -
+	  - You will see that the post views in post single page is increasing by 2 instead of 1. This is because of React Strict mode's twice running `useEffect()` hook on development build.
 
 ### Points to note
