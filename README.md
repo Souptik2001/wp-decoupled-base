@@ -20,6 +20,7 @@ A WordPress decoupled setup. The total setup is divided into three parts -
 	  - When we create a plugin instead of mu-plugin, then if the plugin is deactivated then the site would break. In that case on VIP environment we can activate those plugins through code, to make sure they are always active.
 	- Import the sample data provided using - `wp import <file> --authors=create`.
 	- Change the permalink structure to some pretty permalink structure - `wp rewrite structure '/%year%/%monthnum%/%day%/%postname%/'`
+	- Create application password of a user - `wp user application-password create <user> "GraphQL server"`. This will be used in the GraphQL section to fill the environment variables.
 - GraphQL setup -
 	- Go to the `graphql` directory of the project.
 	- Run `nvm use`.
