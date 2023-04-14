@@ -19,6 +19,7 @@ function BlogList() {
 	const {data, loading, error} = useQuery(
 		GET_POSTS,
 		{
+			// TODO: Implement lazy query to handle this situation where the posttype null is also send as request resulting in redundant requests.
 			variables: {
 				limit: 10,
 				postType: postTypeData?.rest_base,
