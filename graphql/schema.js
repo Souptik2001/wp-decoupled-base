@@ -110,7 +110,7 @@ export const typeDefs = `#graphql
   }
 
   type Query {
-    posts(postType: String!, limit: Int, offset: Int, after: String, taxonomy: String, term: Int): PostReturn
+    posts(postType: String, limit: Int, offset: Int, after: String, taxonomy: String, term: Int): PostReturn
     post(postType: String!, slug: String!): Post
     menu(id: Int, slug: String): Menu
     taxonomies(postType: String!): [Taxonomy]

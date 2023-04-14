@@ -156,6 +156,10 @@ async function postsResolver(parent, args, {dataSources}) {
 		var totalPosts = posts['meta']['totalPosts'];
 		var totalPages = Math.ceil( totalPosts / limit );
 		posts = posts['response'];
+		// Edge case to handle if REST API of WordPress is not activated.
+		if ( ! Array.isArray(posts) ) {
+			return null;
+		}
 		var hasNextPage = posts.length >= limit+1
 		if(hasNextPage) {
 			posts.pop();
