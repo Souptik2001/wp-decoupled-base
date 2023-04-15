@@ -5,6 +5,7 @@ import '../../assets/css/BlogList.css';
 import '../../assets/css/Navigation.css';
 import { GET_POSTS } from "../../queries/Posts";
 import { PostStoreContext } from "../BlogListRoutes";
+import Loading from "../Loading";
 import PageNotFound from "../PageNotFound";
 import BlogListCard from "./BlogListCard";
 
@@ -19,7 +20,6 @@ function BlogList() {
 	const {data, loading, error} = useQuery(
 		GET_POSTS,
 		{
-			// TODO: Implement lazy query to handle this situation where the posttype null is also send as request resulting in redundant requests.
 			variables: {
 				limit: 10,
 				postType: postTypeData?.rest_base,
@@ -53,11 +53,11 @@ function BlogList() {
 	}
 
 	return (
-		<div>
+		<div data-testid="post-list">
 			{
 				loading
 				&&
-				<h1>Loading...</h1>
+				<Loading />
 			}
 			{
 				data?.posts

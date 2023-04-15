@@ -5,6 +5,7 @@ import { GET_POST_TYPE } from "../queries/PostType";
 import Blog from "./Blog/Blog";
 import BlogList from "./BlogList/BlogList";
 import Filters from "./BlogList/Filters";
+import Loading from "./Loading";
 import PageNotFound from "./PageNotFound";
 
 export const PostStoreContext = createContext();
@@ -54,7 +55,7 @@ function BlogListRoutes() {
 
 	if (loading) {
 		return(
-			<h1>Loading...</h1>
+			<Loading />
 		)
 	}
 

@@ -3,6 +3,7 @@ import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { GET_POST } from "../../queries/Post";
 import { PostStoreContext } from "../BlogListRoutes";
+import Loading from "../Loading";
 import PageNotFound from "../PageNotFound";
 import BlogContent from "./BlogContent";
 
@@ -26,11 +27,11 @@ function Blog() {
 	}, [data]);
 
 	return (
-		<div>
+		<div data-testid="single-post">
 			{
 				loading
 				&&
-				(<h1>Loading...</h1>)
+				(<Loading />)
 			}
 			{
 				! loading

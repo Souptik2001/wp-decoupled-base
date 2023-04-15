@@ -77,7 +77,7 @@ test('renders single blog page', async () => {
 	);
 
 	await waitFor(
-		() => screen.findByTestId("single-blog-content"),
+		() => screen.findByTestId("single-post-content"),
 		{
 			timeout: 1000 * 60
 		}
