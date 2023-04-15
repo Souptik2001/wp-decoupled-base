@@ -1,8 +1,8 @@
 import { useQuery } from "@apollo/client";
 import { Link } from 'react-router-dom';
-import "../assets/css/Navbar.css";
-import { GET_NAVBAR } from "../queries/Navbar";
-import Menu from "./Navbar/Menu";
+import "../../assets/css/Navbar.css";
+import { GET_NAVBAR } from "../../queries/Navbar";
+import Menu from "./Menu";
 
 
 function Navbar() {

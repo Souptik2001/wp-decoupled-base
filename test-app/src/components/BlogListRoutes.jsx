@@ -2,8 +2,8 @@ import { useQuery } from "@apollo/client";
 import { createContext, useReducer } from "react";
 import { Route, Routes, useParams } from "react-router-dom";
 import { GET_POST_TYPE } from "../queries/PostType";
-import Blog from "./Blog";
-import BlogList from "./BlogList";
+import Blog from "./Blog/Blog";
+import BlogList from "./BlogList/BlogList";
 import Filters from "./BlogList/Filters";
 import PageNotFound from "./PageNotFound";
 

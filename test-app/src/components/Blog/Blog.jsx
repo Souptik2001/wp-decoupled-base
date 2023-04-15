@@ -1,10 +1,10 @@
 import { useQuery } from "@apollo/client";
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { GET_POST } from "../queries/Post";
-import BlogContent from "./Blog/BlogContent";
-import { PostStoreContext } from "./BlogListRoutes";
-import PageNotFound from "./PageNotFound";
+import { GET_POST } from "../../queries/Post";
+import { PostStoreContext } from "../BlogListRoutes";
+import PageNotFound from "../PageNotFound";
+import BlogContent from "./BlogContent";
 
 function Blog() {
 	const {slug} = useParams();
@@ -38,7 +38,6 @@ function Blog() {
 				data?.post
 				&&
 				(<BlogContent blogData={data?.post} />)
-
 			}
 			{
 				! loading

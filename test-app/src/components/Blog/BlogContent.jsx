@@ -63,7 +63,7 @@ function BlogContent({blogData}) {
 	}, []);
 
 	return (
-		<div>
+		<div data-testid="single-blog-content">
 			<h1>{blogData?.title?.rendered}</h1>
 			<em>Written by <strong>{blogData?.author?.name}</strong> on <strong>{dateString}</strong></em>
 			<br />
