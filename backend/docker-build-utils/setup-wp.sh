@@ -8,7 +8,7 @@ wp core install --url=http://localhost:8080 --title=Test --admin_user=admin --ad
 
 apt install mariadb-client -y
 
-wp db import ./wp-content/wordpress-2023-04-18-55b70e7.sql --allow-root
+wp db import ./wp-content/db-dump.sql --allow-root
 
 wp search-replace "https://test.lndo.site" "http://localhost:8080" --all-tables --allow-root
 
