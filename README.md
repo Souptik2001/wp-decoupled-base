@@ -9,6 +9,8 @@ A WordPress decoupled setup. The total setup is divided into three parts -
 
 ### Local setup
 
+**For faster setup using Docker please check [here](#docker-based-setup-🐳).**
+
 - Clone the repository.
 - WordPress setup -
 	- Create a local WordPress setup.
@@ -35,6 +37,16 @@ A WordPress decoupled setup. The total setup is divided into three parts -
 	- Run `npm run serve` (To create production-ready build).
 	- Please note that if you run development build, using `npm run start` there will be one issue -
 	  - You will see that the post views in post single page is increasing by 2 instead of 1. This is because of React Strict mode's twice running `useEffect()` hook on development build.
+
+#### Docker based setup 🐳
+
+For running the docker based setup just run `docker compose up`. The apps will be exposed in the following ports of your system.
+- The WordPress instance will be accessible through port `8080`.
+- The GraphQL instance will be accessible through port `4040`.
+- And the React instance will be accessible through port `3030`.
+
+One thing to note is that when you will run the `docker compose up` command then, you will notice that the WordPress container throws errors and fails for sometime. That's because the `depend_on` parameter ensures that the database container is started, but doesn't ensure that the DB is ready to accept connections. For that reason initially it fails. But it keeps retying due to the `restart` configuration, and ultimately, when the DB is ready, the WordPress also get's installed successfully.
+Also here, the codebase is not mapped to the docker container volumes. Therefore any changes will not be reflected inside the containers.
 
 ### TODO
 
