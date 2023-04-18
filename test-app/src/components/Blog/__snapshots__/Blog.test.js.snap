@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders single blog page 1`] = `
-"<body><div><div><div data-testid=\\"single-blog-content\\"><h1>Mock Test</h1><em>Written by <strong>admin</strong> on <strong>14/3/2023</strong></em><br><em>Views: <strong>0</strong></em><div>
+"<body><div><div data-testid=\\"single-post\\"><div data-testid=\\"single-post-content\\"><h1>Mock Test</h1><em>Written by <strong>admin</strong> on <strong>14/3/2023</strong></em><br><em>Views: <strong>10</strong></em><div>
 <p>This is a mock test data.</p>
 </div></div></div></div></body>"
 `;
