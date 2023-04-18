@@ -9,7 +9,7 @@ A WordPress decoupled setup. The total setup is divided into three parts -
 
 ### Local setup
 
-**For faster setup using Docker please check [here](#docker-based-setup-🐳).**
+**For faster setup using Docker please check [here](#docker-based-setup-).**
 
 - Clone the repository.
 - WordPress setup -
