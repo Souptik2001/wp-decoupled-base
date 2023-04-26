@@ -1,5 +1,7 @@
 # WP Decoupled Sample
 
+There are certain mistakes which I made in this project. So, here are teh list of those [mistakes](#mistakes).
+
 A WordPress decoupled setup. The total setup is divided into three parts -
 - **WordPress** - Just a CMS to store the data and exposes the data to be consumed by its REST API.
 - **GraphQL Server** - GraphQL runs as a separate service, which is used by the frontend React application to consume data. GraphQL uses the WordPress as one of its data source (in this case the one and only data source) to consume data and serve that to frontend application.
@@ -52,3 +54,9 @@ Also here, the codebase is not mapped to the docker container volumes. Therefore
 
 - Unit Testing. Have to write the following unit tests -
   - [ ] Surely something..
+
+### Mistakes
+
+- Didn't use proper naming conventions for fields of GraphQL types. The fields should be of `camelCase`, but I have used `snake_case`.
+- The React code is not created keeping testability in mind. That's why writing test cases for these has become be difficult.
+- The schema is not query driven. I have created the query as per the data returned by the WordPress REST API. But this is not recommended. The schema should be always as per the client's requirement.
