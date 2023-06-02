@@ -1,6 +1,6 @@
-# WP Decoupled Sample
+# WP Decoupled Base
 
-There are certain mistakes which I made in this project. So, here are teh list of those [mistakes](#mistakes).
+There are certain mistakes which I made in this project. So, here are the list of those [mistakes](#mistakes).
 
 A WordPress decoupled setup. The total setup is divided into three parts -
 - **WordPress** - Just a CMS to store the data and exposes the data to be consumed by its REST API.
