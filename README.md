@@ -2,7 +2,7 @@
 
 There are certain mistakes which I made in this project. So, here are the list of those [mistakes](#mistakes).
 
-A WordPress decoupled setup. The total setup is divided into three parts -
+A WordPress decoupled setup. This is similary to [Souptik2001/Souptik2001.github.io](https://github.com/Souptik2001/Souptik2001.github.io) just with GraphQL layer separate from WordPress and React instead of Next.JS. The total setup is divided into three parts -
 - **WordPress** - Just a CMS to store the data and exposes the data to be consumed by its REST API.
 - **GraphQL Server** - GraphQL runs as a separate service, which is used by the frontend React application to consume data. GraphQL uses the WordPress as one of its data source (in this case the one and only data source) to consume data and serve that to frontend application.
 - **Frontend React Application** - The React application consumes the data from the the GraphQL server and displays that to the user.
