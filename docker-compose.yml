@@ -37,7 +37,7 @@ services:
 
 
   db:
-    image: mysql:5.7
+    image: mariadb:latest
     restart: always
     environment:
       MYSQL_DATABASE: wordpress
